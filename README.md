@@ -8,6 +8,7 @@ A terrible UI overhaul for Garry's Mod.
 ## You can choose between light or dark mode!
 
 Features:
+
 Derma Reskin
 
   *This changes the look of the spawnmenu, it's a bit flatter and simpler. If you use ULX, you can choose to change the Derma theme in ULX settings.*
