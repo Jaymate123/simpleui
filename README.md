@@ -1,6 +1,3 @@
-# simpleui
-A terrible UI overhaul for Garry's Mod.
-
 # Hello!
 
 **Are you tired of Garry's Mods UI? Do you want something cool and edgy to spice things up! Well here's my terribly made addon, which is however a WIP and is being actively developed. I am probably going to change the name to Simple UI because it isn't very good, very basic.**
