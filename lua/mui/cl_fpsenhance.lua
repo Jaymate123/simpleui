@@ -104,12 +104,14 @@ end
 
 local function runWhenValid()
 	timer.Simple(1, function()
+		print("Thank you so much for using my addon, ModernUI!")
+		print("- Jaymate")
+		c = MUI.Get()
+		chat.AddText(c.main, "[ModernUI] Go to: Spawnmenu (Q) > Options (Top right) to adjust settings.")
+		
 		if fpsenhanceConvar:GetInt() >= 1 then
-			chat.AddText(Color(255, 255, 255), "FPS Enhanced :)") 
 			fpsenhanceenable()
 			fpsenhance = true
-		else
-			chat.AddText(Color(255, 255, 255), "Want some more sweet sweet FPS? Type !enablefpsenhance") 
 		end
 	end)
 end
@@ -130,30 +132,14 @@ local function loopUntilValid()
 end
 loopUntilValid()
 
-local chatCommands = {
-	["!enablefpsenhance"] = function() 
-		if !fpsenhance then 
-			fpsenhance = true 
-			fpsenhanceenable()
-		end 
-		RunConsoleCommand("fpsenhance", "1")
-		chat.AddText(Color(255, 255, 255), "FPS Enhanced :)")
-	end,
-	["!disablefpsenhance"] = function()
-		if fpsenhance then
-			fpsenhancedisable()
-			fpsenhance = false
-		end
-		RunConsoleCommand("fpsenhance", "0")
-		chat.AddText(Color(255, 255, 255), "FPS Unenhanced :(")
-	end,
-}
-hook.Add("OnPlayerChat", "fpsenhance", function( ply, strText, bTeam, bDead )
-	if ply == LocalPlayer() then
-		strText = string.lower( strText )
-		if chatCommands[strText] != nil then
-			chatCommands[strText]()
-			return true
-		end
-	end
-end)
+cvars.RemoveChangeCallback("fpsenhance", "fpsenchance_callback")
+cvars.AddChangeCallback("fpsenhance", function(cname, old, new)
+	print(new == "1.00")
+	print(type(new))
+	print(new)
+	if new == "1.00" then 
+        fpsenhanceenable()
+    else 
+        fpsenhancedisable()
+    end
+end, "fpsenchance_callback")

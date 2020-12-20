@@ -2,8 +2,7 @@
 -- ModernUI -- By Jaymate :) ------
 -----------------------------------
 
-print("Thank you so much for using my addon, ModernUI!")
-print("- Jaymate")
+include( "mui/cl_init.lua" )
 
 function hidehud(name)
 	for k, v in pairs({"CHudHealth", "CHudBattery", "CHudAmmo", "CHudSuitPower", "CHudSecondaryAmmo"})do
@@ -15,7 +14,7 @@ hook.Add("HUDShouldDraw", "HideBadHud", hidehud)
 surface.CreateFont("muiHUD", {
     font = "Open Sans",
     size = 40,
-    shadow = true,
+    shadow = false,
     antialias = true,
 	additive = false,
 
@@ -38,9 +37,31 @@ local janim = 0.5
 local janimhealth = 100
 local janimarmor = 100
 
+function drawBackground()
+    local c = MUI.Get()
+    local armor = LocalPlayer():Armor()
+    local player = LocalPlayer()
+    
+    if wep:IsValid() then
+        local wep = player:GetActiveWeapon() 
+        if wep:GetMaxClip1() > 0 then
+            draw.RoundedBox(8, w - 155, h - 70, 140, 55, c.main)
+        end
+    end
+    
+    if armor >1 then
+        draw.RoundedBox(8, 15, h - 70, 575, 55, c.main)
+    else
+        draw.RoundedBox(8, 15, h - 70, 300, 55, c.main)
+    end
+    
+end
+
 function drawHealth()
+    local c = MUI.Get()
     local health = LocalPlayer():Health()
     local jhealth = math.Clamp(health, 0, 100)
+    local hudtext = MUI.GetTextColor()
 
     if health >9 then
         draw.RoundedBox(6, x, h - 50, 200, 10, HealthBG)
@@ -51,9 +72,9 @@ function drawHealth()
     end
 
     if health == 100 then
-        draw.SimpleText(health, "muiHUD", a, h - 65, White, TEXT_ALIGN_LEFT)
+        draw.SimpleText(health, "muiHUD", a, h - 65, hudtext, TEXT_ALIGN_LEFT)
     else
-        draw.SimpleText(health, "muiHUD", b, h - 65, White, TEXT_ALIGN_LEFT)
+        draw.SimpleText(health, "muiHUD", b, h - 65, hudtext, TEXT_ALIGN_LEFT)
     end
 
     local player = LocalPlayer()
@@ -61,7 +82,7 @@ function drawHealth()
 	if wep:IsValid() then
 		if wep:GetMaxClip1() > 0 then
 						
-            draw.SimpleText(wep:Clip1() .. " / " .. player:GetAmmoCount(wep:GetPrimaryAmmoType()), "muiHUD", w - 50, h - 65, Color( 255, 255, 255, 255 ), TEXT_ALIGN_RIGHT )
+            draw.SimpleText(wep:Clip1() .. " / " .. player:GetAmmoCount(wep:GetPrimaryAmmoType()), "muiHUD", w - 30, h - 65, hudtext, TEXT_ALIGN_RIGHT )
 		end
 	end
 end
@@ -69,7 +90,8 @@ end
 function drawArmor()
     local armor = LocalPlayer():Armor()
     local jarmor = math.Clamp(armor, 0, 100)
-    
+    local hudtext = MUI.GetTextColor()
+
     if armor >9 then
         draw.RoundedBox(6, x * 4.15, h - 50, 200, 10, ArmorBG)
         draw.RoundedBox(6, x * 4.15, h - 50, janimarmor * 2, 10, Armor)
@@ -79,17 +101,22 @@ function drawArmor()
     end
 
     if armor == 100 then
-        draw.SimpleText(armor, "muiHUD", a * 12.5, h - 65, White, TEXT_ALIGN_LEFT)
+        draw.SimpleText(armor, "muiHUD", a * 12.5, h - 65, hudtext, TEXT_ALIGN_LEFT)
     else
-        draw.SimpleText(armor, "muiHUD", b * 9, h - 65, White, TEXT_ALIGN_LEFT)
+        draw.SimpleText(armor, "muiHUD", b * 9, h - 65, hudtext, TEXT_ALIGN_LEFT)
     end
 end
 
 function hud()    
+        
     local health = LocalPlayer():Health()
     local jhealth = math.Clamp(health, 0, 100)
     local armor = LocalPlayer():Armor()
     local jarmor = math.Clamp(armor, 0, 100)
+    
+    if MUI.hudbg:GetBool() and health >0 then
+        drawBackground()
+    else end
 
     if health >0 then
     drawHealth()
