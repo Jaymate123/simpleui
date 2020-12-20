@@ -28,7 +28,7 @@ You can choose between light or dark mode!
 
 **Cute HUD**
 
-  *Simple and modern! A simple health and armor bar, that slide and disappear when not needed. There is also a basic ammo display.*
+  *Simple and modern! A simple health and armor bar, that slide and disappear when not needed. There is also a basic ammo display. You can optionally enable a background for it to in (Spawnmenu -> Options)*
 
 
 **Slightly Nicer Scoreboard**
@@ -39,7 +39,7 @@ You can choose between light or dark mode!
 **Performance Enhancements**
 
   *We disable widgets and hooks for performance, and we have a fps boost command. It works the same as most other systems.*
-    !enablefpsenhance OR !disablefpsenhance 
+    (enabled/disabled permanently changed in Spawnmenu -> Options)
 
 
 
