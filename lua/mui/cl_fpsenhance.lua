@@ -134,11 +134,8 @@ loopUntilValid()
 
 cvars.RemoveChangeCallback("fpsenhance", "fpsenchance_callback")
 cvars.AddChangeCallback("fpsenhance", function(cname, old, new)
-	print(new == "1.00")
-	print(type(new))
-	print(new)
 	if new == "1.00" then 
-        fpsenhanceenable()
+		fpsenhanceenable()
     else 
         fpsenhancedisable()
     end

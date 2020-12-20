@@ -14,7 +14,7 @@ MUI.colors = {
        light = {
        main = Color(255, 255, 255),
        second = Color(230, 230, 230),
-	   text = Color(0, 0, 0)
+	   text = Color(35, 35, 35)
     },
     
     dark = {

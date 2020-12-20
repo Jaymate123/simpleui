@@ -4,7 +4,8 @@
 
 local function includ(name)
 	if SERVER then
-		AddCSLuaFile("mui/" .. name)
+        AddCSLuaFile("mui/" .. name)
+        resource.AddWorkshop( '2011745721' )
 	else 
 		include("mui/" .. name)
 	end
