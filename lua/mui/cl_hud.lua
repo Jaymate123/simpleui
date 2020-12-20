@@ -41,9 +41,9 @@ function drawBackground()
     local c = MUI.Get()
     local armor = LocalPlayer():Armor()
     local player = LocalPlayer()
-    
+    local wep = player:GetActiveWeapon()
+
     if wep:IsValid() then
-        local wep = player:GetActiveWeapon() 
         if wep:GetMaxClip1() > 0 then
             draw.RoundedBox(8, w - 155, h - 70, 140, 55, c.main)
         end
