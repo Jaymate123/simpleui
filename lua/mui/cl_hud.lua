@@ -94,8 +94,8 @@ function drawArmor()
     local hudtext = MUI.GetTextColor()
 
     if armor >9 then
-        draw.RoundedBox(6, x * 4.15, h - 48, 200, 10, ArmorBG)
-        draw.RoundedBox(6, x * 4.15, h - 48, janimarmor * 2, 10, Armor)
+        draw.RoundedBox(6, x * 4.06, h - 48, 200, 10, ArmorBG)
+        draw.RoundedBox(6, x * 4.06, h - 48, janimarmor * 2, 10, Armor)
     else
         draw.RoundedBox(6, y * 5, h - 48, 200, 10, ArmorBG)
         draw.RoundedBox(6, y * 5, h - 48, janimarmor * 2, 10, Armor)
