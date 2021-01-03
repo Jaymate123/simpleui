@@ -5,7 +5,7 @@
 include( "mui/cl_init.lua" )
 
 function hidehud(name)
-	for k, v in pairs({"CHudHealth", "CHudBattery", "CHudAmmo", "CHudSuitPower", "CHudSecondaryAmmo"})do
+	for k, v in pairs({"CHudHealth", "CHudBattery", "CHudAmmo", "CHudSuitPower", "CHudSecondaryAmmo", "CHudDeathNotice"})do
 		if name == v then return false end
 	end
 end
@@ -14,10 +14,11 @@ hook.Add("HUDShouldDraw", "HideBadHud", hidehud)
 surface.CreateFont("muiHUD", {
     font = "Open Sans",
     size = 40,
-    shadow = false,
-    antialias = true,
-	additive = false,
+})
 
+surface.CreateFont("death", {
+    font = "Open Sans",
+    size = 28,
 })
 
 local Health = Color( 235, 73, 75 )
@@ -64,17 +65,17 @@ function drawHealth()
     local hudtext = MUI.GetTextColor()
 
     if health >9 then
-        draw.RoundedBox(6, x, h - 50, 200, 10, HealthBG)
-        draw.RoundedBox(6, x, h - 50, janimhealth * 2, 10, Health)
+        draw.RoundedBox(6, x, h - 48, 200, 10, HealthBG)
+        draw.RoundedBox(6, x, h - 48, janimhealth * 2, 10, Health)
     else
-        draw.RoundedBox(6, y, h - 50, 200, 10, HealthBG)
-        draw.RoundedBox(6, y, h - 50, janimhealth * 2, 10, Health)
+        draw.RoundedBox(6, y, h - 48, 200, 10, HealthBG)
+        draw.RoundedBox(6, y, h - 48, janimhealth * 2, 10, Health)
     end
 
     if health == 100 then
-        draw.SimpleText(health, "muiHUD", a, h - 65, hudtext, TEXT_ALIGN_LEFT)
+        draw.SimpleText(health, "muiHUD", a, h - 64, hudtext, TEXT_ALIGN_LEFT)
     else
-        draw.SimpleText(health, "muiHUD", b, h - 65, hudtext, TEXT_ALIGN_LEFT)
+        draw.SimpleText(health, "muiHUD", b, h - 64, hudtext, TEXT_ALIGN_LEFT)
     end
 
     local player = LocalPlayer()
@@ -93,17 +94,17 @@ function drawArmor()
     local hudtext = MUI.GetTextColor()
 
     if armor >9 then
-        draw.RoundedBox(6, x * 4.15, h - 50, 200, 10, ArmorBG)
-        draw.RoundedBox(6, x * 4.15, h - 50, janimarmor * 2, 10, Armor)
+        draw.RoundedBox(6, x * 4.15, h - 48, 200, 10, ArmorBG)
+        draw.RoundedBox(6, x * 4.15, h - 48, janimarmor * 2, 10, Armor)
     else
-        draw.RoundedBox(6, y * 5, h - 50, 200, 10, ArmorBG)
-        draw.RoundedBox(6, y * 5, h - 50, janimarmor * 2, 10, Armor)
+        draw.RoundedBox(6, y * 5, h - 48, 200, 10, ArmorBG)
+        draw.RoundedBox(6, y * 5, h - 48, janimarmor * 2, 10, Armor)
     end
 
     if armor == 100 then
-        draw.SimpleText(armor, "muiHUD", a * 12.5, h - 65, hudtext, TEXT_ALIGN_LEFT)
+        draw.SimpleText(armor, "muiHUD", a * 12.5, h - 64, hudtext, TEXT_ALIGN_LEFT)
     else
-        draw.SimpleText(armor, "muiHUD", b * 9, h - 65, hudtext, TEXT_ALIGN_LEFT)
+        draw.SimpleText(armor, "muiHUD", b * 9, h - 64, hudtext, TEXT_ALIGN_LEFT)
     end
 end
 
@@ -125,6 +126,10 @@ function hud()
     if armor >0 then
     drawArmor()
     else end
+
+    if health == 2 then
+        deahtnotice()
+    end
 
     if LocalPlayer():Health() > janimhealth and janimhealth < 100 then 
         janimhealth = janimhealth + janim
