@@ -2,7 +2,7 @@
 -- ModernUI -- By Jaymate :) ------
 -----------------------------------
 if SERVER then
-    resource.AddWorkshop( '2011745721' )
+    resource.AddWorkshop( '2321664841' )
 end
 
 local function includ(name)
